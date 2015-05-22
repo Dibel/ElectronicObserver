@@ -58,5 +58,44 @@ namespace ElectronicObserver.Properties {
 				resourceCulture = value;
 			}
 		}
+		
+		/// <summary>
+		///   // KCRDBと競合しないように同じように処理
+		///try {
+		///	var hideStyle = {width:&quot;0px&quot;,height:&quot;0px&quot;,visibility:&quot;hidden&quot;,display:&quot;none&quot;};
+		///	var fillStyle = {margin:&quot;0px&quot;,padding:&quot;0px&quot;,position:&quot;fixed&quot;,left:&quot;0px&quot;,top:&quot;0px&quot;,width:&quot;100%&quot;,height:&quot;100%&quot;,overflow:&quot;hidden&quot;};
+		///	var jqBody=document.body;
+		///	$(jqBody).css(&quot;zoom&quot;,&quot;normal&quot;);
+		///	$(jqBody).css({margin:&quot;0px&quot;,padding:&quot;0px&quot;,overflow:&quot;hidden&quot;});
+		///	$(&quot;#spacing_top&quot;).css(hideStyle);
+		///	$(&quot;#adFlashWrap&quot;).css(fillStyle);
+		///	$(&quot;#wsFlashWrap&quot;).css(fillStyle);
+		///	$(&quot;#flashWrap&quot;).css(fillStyle); [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+		/// </summary>
+		internal static string FrameScript {
+			get {
+				return ResourceManager.GetString("FrameScript", resourceCulture);
+			}
+		}
+		
+		/// <summary>
+		///   // KCRDBと競合しないように同じように処理
+		///try {
+		///	var hideStyle = {width:&quot;0px&quot;,height:&quot;0px&quot;,visibility:&quot;hidden&quot;,display:&quot;none&quot;};
+		///	var fillStyle = {margin:&quot;0px&quot;,padding:&quot;0px&quot;,position:&quot;fixed&quot;,left:&quot;0px&quot;,top:&quot;0px&quot;,width:&quot;100%&quot;,height:&quot;100%&quot;,overflow:&quot;hidden&quot;};
+		///	$(document.body).css({margin:&quot;0px&quot;,padding:&quot;0px&quot;,overflow:&quot;hidden&quot;});
+		///	$(&quot;img&quot;).css(hideStyle);
+		///	//$(&quot;#dmm_ntgnavi&quot;).css(hideStyle);
+		///	$(&quot;#dmm-ntgnavi-renew&quot;).css(hideStyle);
+		///	$(&quot;#w&quot;).css(fillStyle);
+		///	$(&quot;#main-ntg&quot;).css(fillStyle);
+		///	$(&quot;#page&quot;).css(fillStyle);
+		/// [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+		/// </summary>
+		internal static string PageScript {
+			get {
+				return ResourceManager.GetString("PageScript", resourceCulture);
+			}
+		}
 	}
 }

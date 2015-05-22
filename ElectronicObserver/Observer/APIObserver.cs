@@ -118,14 +118,17 @@ namespace ElectronicObserver.Observer {
 		public int Start( int portID, Control UIControl ) {
 			this.UIControl = UIControl;
 
-			Fiddler.FiddlerApplication.Startup( portID, Fiddler.FiddlerCoreStartupFlags.ChainToUpstreamGateway |
+			Fiddler.FiddlerCoreStartupFlags flags = Fiddler.FiddlerCoreStartupFlags.ChainToUpstreamGateway |
 				Fiddler.FiddlerCoreStartupFlags.OptimizeThreadPool |
-				( Utility.Configuration.Config.Connection.RegisterAsSystemProxy ? Fiddler.FiddlerCoreStartupFlags.RegisterAsSystemProxy : 0 ) );
+				( Utility.Configuration.Config.Connection.RegisterAsSystemProxy ? Fiddler.FiddlerCoreStartupFlags.RegisterAsSystemProxy : 0 );
 
-			/*
-			Fiddler.URLMonInterop.SetProxyInProcess( string.Format( "127.0.0.1:{0}",
-						Fiddler.FiddlerApplication.oProxy.ListenPort ), "<local>" );
-			*/
+			Fiddler.FiddlerApplication.Startup( portID, flags );
+
+			if ( (flags & Fiddler.FiddlerCoreStartupFlags.RegisterAsSystemProxy) != Fiddler.FiddlerCoreStartupFlags.RegisterAsSystemProxy ) {
+				Fiddler.URLMonInterop.SetProxyInProcess( string.Format( "127.0.0.1:{0}",
+							Fiddler.FiddlerApplication.oProxy.ListenPort ), "<local>" );
+			}
+			
 			ProxyStarted();
 
 			Utility.Logger.Add( 2, string.Format( "APIObserver: ポート {0} 番で受信を開始しました。", Fiddler.FiddlerApplication.oProxy.ListenPort ) );

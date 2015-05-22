@@ -65,6 +65,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CoreAudioApi">
+      <HintPath>..\assemblies\CoreAudioApi.dll</HintPath>
+    </Reference>
     <Reference Include="FiddlerCore4">
       <HintPath>..\packages\FiddlerCore.4.5.1.0\lib\net40\FiddlerCore4.dll</HintPath>
     </Reference>
@@ -234,6 +237,7 @@
     <Compile Include="Utility\Storage\SerializableFont.cs" />
     <Compile Include="Utility\Storage\SerializableList.cs" />
     <Compile Include="Utility\SystemEvents.cs" />
+    <Compile Include="Utility\VolumeManager.cs" />
     <Compile Include="Utility\WinAPI.cs" />
     <Compile Include="Window\Control\ColorPicker.cs">
       <SubType>UserControl</SubType>
@@ -385,6 +389,12 @@
     </Compile>
     <Compile Include="Window\FormBattle.Designer.cs">
       <DependentUpon>FormBattle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Window\FormBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\FormBrowser.Designer.cs">
+      <DependentUpon>FormBrowser.cs</DependentUpon>
     </Compile>
     <Compile Include="Window\FormBrowserHost.cs">
       <SubType>Form</SubType>
@@ -556,6 +566,9 @@
     <EmbeddedResource Include="Window\FormBattle.resx">
       <DependentUpon>FormBattle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Window\FormBrowser.resx">
+      <DependentUpon>FormBrowser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Window\FormBrowserHost.resx">
       <DependentUpon>FormBrowserHost.cs</DependentUpon>
     </EmbeddedResource>
@@ -659,6 +672,25 @@
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>WinFormsUI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxSHDocVw">
+      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="SHDocVw">
+      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

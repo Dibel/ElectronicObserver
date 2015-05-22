@@ -577,6 +577,11 @@ namespace ElectronicObserver.Utility {
 			public class ConfigFormBrowser : ConfigPartBase {
 
 				/// <summary>
+				/// 设置浏览器是否另外单独开启线程
+				/// </summary>
+				public bool AnotherProcess { get; set; }
+
+				/// <summary>
 				/// ブラウザの拡大率 10-1000(%)
 				/// </summary>
 				public int ZoomRate { get; set; }
@@ -660,6 +665,7 @@ namespace ElectronicObserver.Utility {
 
 
 				public ConfigFormBrowser() {
+					AnotherProcess = true;
 					ZoomRate = 100;
 					ZoomFit = false;
 					LogInPageURL = @"http://www.dmm.com/netgame_s/kancolle/";

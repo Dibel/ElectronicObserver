@@ -47,12 +47,13 @@ namespace ElectronicObserver.Window {
 		public FormBattle fBattle;
 		public FormFleetOverview fFleetOverview;
 		public FormShipGroup fShipGroup;
-		public FormBrowserHost fBrowser;
+		public FormBrowser fBrowser;
+		public FormBrowserHost fBrowserHost;
 		public FormWindowCapture fWindowCapture;
 
 		#endregion
 
-
+		private bool browserAnotherProcess;
 
 
 		public FormMain() {
@@ -68,6 +69,7 @@ namespace ElectronicObserver.Window {
 
 			Utility.Modify.ModifyConfiguration.Instance.LoadSettings();
 
+			browserAnotherProcess = Utility.Configuration.Config.FormBrowser.AnotherProcess;
 
 			Utility.Logger.Instance.LogAdded += new Utility.LogAddedEventHandler( ( Utility.Logger.LogData data ) => {
 				if ( InvokeRequired ) {
@@ -119,7 +121,13 @@ namespace ElectronicObserver.Window {
 			SubForms.Add( fBattle = new FormBattle( this ) );
 			SubForms.Add( fFleetOverview = new FormFleetOverview( this ) );
 			SubForms.Add( fShipGroup = new FormShipGroup( this ) );
-			SubForms.Add( fBrowser = new FormBrowserHost( this ) );
+
+			if ( browserAnotherProcess ) {
+				SubForms.Add( fBrowserHost = new FormBrowserHost( this ) );
+			} else {
+				SubForms.Add( fBrowser = new FormBrowser( this ) );
+			}
+
 			SubForms.Add( fWindowCapture = new FormWindowCapture( this ) );
 
 			LoadLayout( Configuration.Config.Life.LayoutFilePath );
@@ -142,7 +150,11 @@ namespace ElectronicObserver.Window {
 			}
 
 			// 完了通知（ログインページを開く）
-			fBrowser.InitializeApiCompleted();
+			if ( browserAnotherProcess ) {
+				fBrowserHost.InitializeApiCompleted();
+			} else {
+				fBrowser.InitializeApiCompleted();
+			}
 
 			UIUpdateTimer.Start();
 
@@ -231,7 +243,9 @@ namespace ElectronicObserver.Window {
 
 			UIUpdateTimer.Stop();
 
-			fBrowser.CloseBrowser();
+			if ( browserAnotherProcess ) {
+				fBrowserHost.CloseBrowser();
+			}
 
 			if ( !Directory.Exists( "Settings" ) )
 				Directory.CreateDirectory( "Settings" );
@@ -293,6 +307,9 @@ namespace ElectronicObserver.Window {
 				case "ShipGroup":
 					return fShipGroup;
 				case "Browser":
+					if ( browserAnotherProcess ) {
+						return fBrowserHost;
+					}
 					return fBrowser;
 				case "WindowCapture":
 					return fWindowCapture;
@@ -397,7 +414,11 @@ namespace ElectronicObserver.Window {
 				MessageBox.Show( "レイアウトが初期化されました。\r\n「表示」メニューからお好みのウィンドウを追加してください。", "ウィンドウ レイアウト ファイルが存在しません",
 					MessageBoxButtons.OK, MessageBoxIcon.Information );
 
-				fBrowser.Show( MainDockPanel );
+				if ( browserAnotherProcess ) {
+					fBrowserHost.Show( MainDockPanel );
+				} else {
+					fBrowser.Show( MainDockPanel );
+				}
 
 			} catch ( DirectoryNotFoundException ) {
 
@@ -405,7 +426,11 @@ namespace ElectronicObserver.Window {
 				MessageBox.Show( "レイアウトが初期化されました。\r\n「表示」メニューからお好みのウィンドウを追加してください。", "ウィンドウ レイアウト ファイルが存在しません",
 					MessageBoxButtons.OK, MessageBoxIcon.Information );
 
-				fBrowser.Show( MainDockPanel );
+				if ( browserAnotherProcess ) {
+					fBrowserHost.Show( MainDockPanel );
+				} else {
+					fBrowser.Show( MainDockPanel );
+				}
 
 			} catch ( Exception ex ) {
 
@@ -913,13 +938,21 @@ namespace ElectronicObserver.Window {
 
 		private void StripMenu_Browser_ScreenShot_Click( object sender, EventArgs e ) {
 
-			fBrowser.SaveScreenShot();
+			if ( browserAnotherProcess ) {
+				fBrowserHost.SaveScreenShot();
+			} else {
+				fBrowser.SaveScreenShot();
+			}
 
 		}
 
 		private void StripMenu_Browser_Refresh_Click( object sender, EventArgs e ) {
 
-			fBrowser.RefreshBrowser();
+			if ( browserAnotherProcess ) {
+				fBrowserHost.RefreshBrowser();
+			} else {
+				fBrowser.RefreshBrowser();
+			}
 
 		}
 
@@ -928,7 +961,11 @@ namespace ElectronicObserver.Window {
 			if ( MessageBox.Show( "ログインページへ移動します。\r\nよろしいですか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question )
 				== System.Windows.Forms.DialogResult.Yes ) {
 
-				fBrowser.NavigateToLogInPage();
+				if ( browserAnotherProcess ) {
+					fBrowserHost.NavigateToLogInPage();
+				} else {
+					fBrowser.NavigateToLogInPage();
+				}
 			}
 		}
 
@@ -938,7 +975,11 @@ namespace ElectronicObserver.Window {
 
 				if ( dialog.ShowDialog( this ) == System.Windows.Forms.DialogResult.OK ) {
 
-					fBrowser.Navigate( dialog.InputtedText );
+					if ( browserAnotherProcess ) {
+						fBrowserHost.Navigate( dialog.InputtedText );
+					} else {
+						fBrowser.Navigate( dialog.InputtedText );
+					}
 				}
 			}
 		}
@@ -949,7 +990,11 @@ namespace ElectronicObserver.Window {
 			Utility.Configuration.Config.FormBrowser.ZoomRate =
 				Math.Max( Utility.Configuration.Config.FormBrowser.ZoomRate - 20, 10 );
 
-			fBrowser.ApplyZoom();
+			if ( browserAnotherProcess ) {
+				fBrowserHost.ApplyZoom();
+			} else {
+				fBrowser.ApplyZoom();
+			}
 		}
 
 		private void StripMenu_Browser_Zoom_Incr20_Click( object sender, EventArgs e ) {
@@ -957,7 +1002,11 @@ namespace ElectronicObserver.Window {
 			Utility.Configuration.Config.FormBrowser.ZoomRate =
 				Math.Min( Utility.Configuration.Config.FormBrowser.ZoomRate + 20, 1000 );
 
-			fBrowser.ApplyZoom();
+			if ( browserAnotherProcess ) {
+				fBrowserHost.ApplyZoom();
+			} else {
+				fBrowser.ApplyZoom();
+			}
 		}
 
 
@@ -988,7 +1037,11 @@ namespace ElectronicObserver.Window {
 
 			Utility.Configuration.Config.FormBrowser.ZoomRate = zoom;
 
-			fBrowser.ApplyZoom();
+			if ( browserAnotherProcess ) {
+				fBrowserHost.ApplyZoom();
+			} else {
+				fBrowser.ApplyZoom();
+			}
 		}
 
 		private void StripMenu_Browser_Zoom_DropDownOpening( object sender, EventArgs e ) {
@@ -1001,7 +1054,11 @@ namespace ElectronicObserver.Window {
 		private void StripMenu_Browser_AppliesStyleSheet_CheckedChanged( object sender, EventArgs e ) {
 
 			Utility.Configuration.Config.FormBrowser.AppliesStyleSheet = StripMenu_Browser_AppliesStyleSheet.Checked;
-			fBrowser.ConfigurationChanged();
+			if ( browserAnotherProcess ) {
+				fBrowserHost.ConfigurationChanged();
+			} else {
+				fBrowser.ConfigurationChanged();
+			}
 
 		}
 
@@ -1078,7 +1135,11 @@ namespace ElectronicObserver.Window {
 		}
 
 		private void StripMenu_View_Browser_Click( object sender, EventArgs e ) {
-			fBrowser.Show( MainDockPanel );
+			if ( browserAnotherProcess ) {
+				fBrowserHost.Show( MainDockPanel );
+			} else {
+				fBrowser.Show( MainDockPanel );
+			}
 		}
 
 		private void StripMenu_WindowCapture_SubWindow_Click( object sender, EventArgs e ) {
