@@ -48,6 +48,7 @@ namespace ElectronicObserver.Window {
 
 
 		public FormShipGroup( FormMain parent ) {
+            SuspendLayout();
 			InitializeComponent();
 
 			ControlHelper.SetDoubleBuffered( ShipView );
@@ -116,7 +117,11 @@ namespace ElectronicObserver.Window {
 
 
 			SystemEvents.SystemShuttingDown += SystemShuttingDown;
-		}
+
+            this.AutoScaleMode = AutoScaleMode.Dpi;
+            this.AutoScaleDimensions = new SizeF(96, 96);
+            ResumeLayout();
+        }
 
 
 		private void FormShipGroup_Load( object sender, EventArgs e ) {

@@ -21,8 +21,9 @@ namespace ElectronicObserver.Window.Dialog {
 
 
 		public DialogEquipmentList() {
+            SuspendLayout();
 
-			InitializeComponent();
+            InitializeComponent();
 
 			ControlHelper.SetDoubleBuffered( EquipmentView );
 
@@ -65,9 +66,11 @@ namespace ElectronicObserver.Window.Dialog {
 			DetailView_EquippedShip.DefaultCellStyle = CSUnselectableLeft;
 			DetailView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
-			#endregion
-
-		}
+            #endregion
+            this.AutoScaleMode = AutoScaleMode.Dpi;
+            this.AutoScaleDimensions = new SizeF(96, 96);
+            ResumeLayout();
+        }
 
 		private void DialogEquipmentList_Load( object sender, EventArgs e ) {
 
