@@ -65,6 +65,18 @@ namespace ElectronicObserver.Window.Dialog {
 			DetailView.DefaultCellStyle = CSUnselectableRight;
 			DetailView_EquippedShip.DefaultCellStyle = CSUnselectableLeft;
 			DetailView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            Graphics g = this.CreateGraphics();
+            float dy;
+            try
+            {
+                dy = g.DpiY;
+            }
+            finally
+            {
+                g.Dispose();
+            }
+            DetailView.ColumnHeadersHeight = (int)dy / 96 * 23;
+            EquipmentView.ColumnHeadersHeight = (int)dy / 96 * 23;
 
             #endregion
             this.AutoScaleMode = AutoScaleMode.Dpi;

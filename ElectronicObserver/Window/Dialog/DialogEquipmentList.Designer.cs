@@ -24,6 +24,11 @@
 		/// </summary>
 		private void InitializeComponent() {
             this.EquipmentView = new System.Windows.Forms.DataGridView();
+            this.EquipmentView_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EquipmentView_Icon = new System.Windows.Forms.DataGridViewImageColumn();
+            this.EquipmentView_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EquipmentView_CountAll = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EquipmentView_CountRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TopMenu = new System.Windows.Forms.MenuStrip();
             this.TopMenu_File = new System.Windows.Forms.ToolStripMenuItem();
             this.TopMenu_File_CSVOutput = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,11 +40,6 @@
             this.DetailView_CountAll = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DetailView_CountRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DetailView_EquippedShip = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EquipmentView_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EquipmentView_Icon = new System.Windows.Forms.DataGridViewImageColumn();
-            this.EquipmentView_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EquipmentView_CountAll = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EquipmentView_CountRemain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.EquipmentView)).BeginInit();
             this.TopMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -55,7 +55,6 @@
             this.EquipmentView.AllowUserToDeleteRows = false;
             this.EquipmentView.AllowUserToResizeRows = false;
             this.EquipmentView.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.EquipmentView.ColumnHeadersHeight = 32;
             this.EquipmentView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.EquipmentView_ID,
             this.EquipmentView_Icon,
@@ -75,6 +74,47 @@
             this.EquipmentView.SelectionChanged += new System.EventHandler(this.EquipmentView_SelectionChanged);
             this.EquipmentView.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.EquipmentView_SortCompare);
             this.EquipmentView.Sorted += new System.EventHandler(this.EquipmentView_Sorted);
+            // 
+            // EquipmentView_ID
+            // 
+            this.EquipmentView_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.EquipmentView_ID.HeaderText = "ID";
+            this.EquipmentView_ID.Name = "EquipmentView_ID";
+            this.EquipmentView_ID.ReadOnly = true;
+            this.EquipmentView_ID.Width = 79;
+            // 
+            // EquipmentView_Icon
+            // 
+            this.EquipmentView_Icon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.EquipmentView_Icon.HeaderText = "";
+            this.EquipmentView_Icon.Name = "EquipmentView_Icon";
+            this.EquipmentView_Icon.ReadOnly = true;
+            this.EquipmentView_Icon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.EquipmentView_Icon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.EquipmentView_Icon.Width = 5;
+            // 
+            // EquipmentView_Name
+            // 
+            this.EquipmentView_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.EquipmentView_Name.HeaderText = "装備名";
+            this.EquipmentView_Name.Name = "EquipmentView_Name";
+            this.EquipmentView_Name.ReadOnly = true;
+            // 
+            // EquipmentView_CountAll
+            // 
+            this.EquipmentView_CountAll.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.EquipmentView_CountAll.HeaderText = "全個数";
+            this.EquipmentView_CountAll.Name = "EquipmentView_CountAll";
+            this.EquipmentView_CountAll.ReadOnly = true;
+            this.EquipmentView_CountAll.Width = 5;
+            // 
+            // EquipmentView_CountRemain
+            // 
+            this.EquipmentView_CountRemain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.EquipmentView_CountRemain.HeaderText = "余個数";
+            this.EquipmentView_CountRemain.Name = "EquipmentView_CountRemain";
+            this.EquipmentView_CountRemain.ReadOnly = true;
+            this.EquipmentView_CountRemain.Width = 5;
             // 
             // TopMenu
             // 
@@ -140,7 +180,6 @@
             this.DetailView.AllowUserToDeleteRows = false;
             this.DetailView.AllowUserToResizeRows = false;
             this.DetailView.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.DetailView.ColumnHeadersHeight = 32;
             this.DetailView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DetailView_Level,
             this.DetailView_CountAll,
@@ -189,47 +228,6 @@
             this.DetailView_EquippedShip.Name = "DetailView_EquippedShip";
             this.DetailView_EquippedShip.ReadOnly = true;
             this.DetailView_EquippedShip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // EquipmentView_ID
-            // 
-            this.EquipmentView_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.EquipmentView_ID.HeaderText = "ID";
-            this.EquipmentView_ID.Name = "EquipmentView_ID";
-            this.EquipmentView_ID.ReadOnly = true;
-            this.EquipmentView_ID.Width = 79;
-            // 
-            // EquipmentView_Icon
-            // 
-            this.EquipmentView_Icon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.EquipmentView_Icon.HeaderText = "";
-            this.EquipmentView_Icon.Name = "EquipmentView_Icon";
-            this.EquipmentView_Icon.ReadOnly = true;
-            this.EquipmentView_Icon.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.EquipmentView_Icon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.EquipmentView_Icon.Width = 5;
-            // 
-            // EquipmentView_Name
-            // 
-            this.EquipmentView_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.EquipmentView_Name.HeaderText = "装備名";
-            this.EquipmentView_Name.Name = "EquipmentView_Name";
-            this.EquipmentView_Name.ReadOnly = true;
-            // 
-            // EquipmentView_CountAll
-            // 
-            this.EquipmentView_CountAll.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.EquipmentView_CountAll.HeaderText = "全個数";
-            this.EquipmentView_CountAll.Name = "EquipmentView_CountAll";
-            this.EquipmentView_CountAll.ReadOnly = true;
-            this.EquipmentView_CountAll.Width = 5;
-            // 
-            // EquipmentView_CountRemain
-            // 
-            this.EquipmentView_CountRemain.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.EquipmentView_CountRemain.HeaderText = "余個数";
-            this.EquipmentView_CountRemain.Name = "EquipmentView_CountRemain";
-            this.EquipmentView_CountRemain.ReadOnly = true;
-            this.EquipmentView_CountRemain.Width = 5;
             // 
             // DialogEquipmentList
             // 
